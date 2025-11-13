@@ -1,0 +1,8 @@
+# HTTP library for API requests to IQAir/AirVisual endpoints
+requests>=2.28
+
+# Web scraping fallback for when API is unavailable
+beautifulsoup4>=4.12
+
+# JSON parsing (is already included with Python, but listed anyway for clarity)
+# json - builtin
