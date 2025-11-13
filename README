@@ -75,5 +75,5 @@ File Structure
 Notes:
 
 - The scraper is idempotent – running it multiple times appends new rows, rather than overwriting them
-- For production use, the scraper can be optimised by scheduling scraper runs (e.g., hourly via cron or GitHub Actions)
+- For production use, the scraper can be optimised by scheduling scraper runs (e.g. hourly via cron or GitHub Actions)
 - The API key is stored in environment variables; never commit it to version control
