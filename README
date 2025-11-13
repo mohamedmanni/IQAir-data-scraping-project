@@ -1,4 +1,4 @@
-Air quality observatory application project, created via Python and Microsoft Power BI. This application scrapes real-time air quality data from IQAir's London Bloomsbury station, in a way in which it could be used via Data Visualisation tools such as Microsoft Power BI to create interactive Power BI dashboard.
+Air quality observatory application project, created via Python. This application scrapes real-time air quality data from IQAir's London Bloomsbury station, in a way in which it could be used via Data Visualisation tools such as Microsoft Power BI to create an interactive Power BI dashboard.
 
 Instructions on how to run it:
 
