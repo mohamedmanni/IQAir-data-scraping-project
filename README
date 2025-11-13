@@ -1,0 +1,79 @@
+Air quality observatory application project, created via Python and Microsoft Power BI. This application scrapes real-time air quality data from IQAir's London Bloomsbury station, in a way in which it could be used via Data Visualisation tools such as Microsoft Power BI to create interactive Power BI dashboard.
+
+Instructions on how to run it:
+
+1. Install dependencies:
+
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+
+2. Run the scraper:
+
+Generate a CSV file with current air quality data:
+
+python3 scraper.py
+
+The scraper will do the following:
+
+- Fetch data from the IQAir API
+- Create `data/london_bloomsbury.csv` if it doesn't already exist
+- Append new rows on each run for historical tracking
+
+Output columns:
+
+- `Timestamp` – UTC timestamp of the reading
+- `AQI (US)` – Air Quality Index (US standard)
+- `Main Pollutant` – Primary pollutant affecting air quality
+- `PM2.5`, `PM10`, `O3`, `NO2`, `SO2`, `CO` – Pollutant concentrations (µg/m³)
+- `Temperature (°C)`, `Humidity (%)`, `Wind Speed (m/s)` – Weather data
+
+3. Create Microsoft Power BI Dashboard
+
+- Open Power BI Desktop and select `Get Data`
+- Select Text/CSV from the data sources
+- Browse to `data/london_bloomsbury.csv`
+- Load the data** into Power BI
+
+Configure Data Types:
+
+In Power BI's data view, set these types:
+- `Timestamp` → DateTime (for time-series visualization)
+- `AQI (US)` → Whole Number
+- `PM2.5`, `PM10`, `O3`, `NO2`, `SO2`, `CO` → Decimal Number
+- `Temperature (°C)`, `Humidity (%)`, `Wind Speed (m/s)` → Decimal Number
+
+Suggested Visuals:
+
+- KPI Card: Display current AQI level with color coding (green/yellow/red)
+- Line Chart: AQI trends over time
+- Clustered Bar Chart: Pollutant concentrations (PM2.5, PM10, etc.)
+- Gauge Chart: Current temperature and humidity
+- Table: Historical readings with timestamp and all measurements
+
+Refresh Strategy:
+
+- Local file: Run `scraper.py` manually or schedule with cron/Task Scheduler, then refresh the data source in Power BI
+- Microsoft Power BI Service: Host the CSV on OneDrive/SharePoint for automatic refresh, or use an on-premises gateway for local file access
+
+Environment Variables:
+
+You can provide the API key via environment variable instead of using the default:
+
+export IQAIR_API_KEY=your_api_key_here
+python3 scraper.py
+
+File Structure
+
+.
+├── scraper.py                          # Main scraper script
+├── requirements.txt                    # Python dependencies
+├── data/
+│   └── london_bloomsbury.csv           # Generated CSV (appends on each run)
+└── README.md                           # This file
+
+Notes:
+
+- The scraper is idempotent – running it multiple times appends new rows, rather than overwriting them
+- For production use, the scraper can be optimised by scheduling scraper runs (e.g., hourly via cron or GitHub Actions)
+- The API key is stored in environment variables; never commit it to version control
